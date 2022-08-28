@@ -16,17 +16,17 @@
   \******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_date__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/date */ \"./modules/date.js\");\n\r\n(0,_modules_date__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\r\n\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_trype__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/trype */ \"./modules/trype.js\");\n\r\n(0,_modules_trype__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\r\n\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ }),
 
-/***/ "./modules/date.js":
-/*!*************************!*\
-  !*** ./modules/date.js ***!
-  \*************************/
+/***/ "./modules/trype.js":
+/*!**************************!*\
+  !*** ./modules/trype.js ***!
+  \**************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst date = () => {\r\n  let idInterval = 0;\r\n  const getTime = () => {\r\n    const date = new Date();\r\n    const dateStop = new Date(`1 January  ${date.getFullYear() + 1}`).getTime();\r\n    const dateNow = new Date().getTime();\r\n    const timeRemaining = dateStop - dateNow;\r\n    const daysRemainder =\r\n      Math.floor(timeRemaining / 8.64e7) < 0\r\n        ? \"0\"\r\n        : Math.floor(timeRemaining / 8.64e7);\r\n    const hours = date.getHours();\r\n    const day = [\r\n      \"Воскресенье\",\r\n      \"Понедельник\",\r\n      \"Вторник\",\r\n      \"Среда\",\r\n      \"Четверг\",\r\n      \"Пятница\",\r\n      \"Суббота\",\r\n    ][date.getDay()];\r\n    const now = date.toLocaleTimeString(\"en\");\r\n\r\n    let timeOfDay = \"\";\r\n    if (hours < 10) {\r\n      timeOfDay = \"утро\";\r\n    } else if (hours < 18) {\r\n      timeOfDay = \"день\";\r\n    } else {\r\n      timeOfDay = \"вечер\";\r\n    }\r\n\r\n    return {\r\n      timeOfDay,\r\n      day,\r\n      now,\r\n      daysRemainder,\r\n    };\r\n  };\r\n\r\n  const addTimeInfo = () => {\r\n    const { timeOfDay, day, now, daysRemainder } = getTime();\r\n    const box = document.createElement(\"div\");\r\n    const app = document.querySelector(\".app\");\r\n    const innHTML = (box.innerHTML = `\r\n    Добрый ${timeOfDay} <br>\r\n    Сегодня: ${day} <br>\r\n    Текущее время: ${now} <br>\r\n    До нового года осталось ${daysRemainder} дней <br>\r\n    `);\r\n    if (app.innerHTML !== \"\") {\r\n      app.innerHTML = innHTML;\r\n    } else {\r\n      app.append(box);\r\n    }\r\n\r\n    if (daysRemainder < 0) {\r\n      clearInterval(idInterval);\r\n    }\r\n  };\r\n\r\n  idInterval = setInterval(addTimeInfo, 1000);\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (date);\r\n\n\n//# sourceURL=webpack:///./modules/date.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst trype = () => {\r\n  const dataDebouncing = {\r\n    prevCall: 0,\r\n    lastCall: 0,\r\n    idInterval: 0,\r\n  };\r\n\r\n  const paragraph = document.querySelector(\".paragraph\");\r\n  const input = document.querySelector(\"#input\");\r\n\r\n  const addText = () => {\r\n    paragraph.textContent = input.value;\r\n  };\r\n\r\n  const debouncing = (func, time) => {\r\n    return () => {\r\n      dataDebouncing.prevCall = dataDebouncing.lastCall;\r\n      dataDebouncing.lastCall = Date.now();\r\n      if (\r\n        dataDebouncing.prevCall != 0 &&\r\n        dataDebouncing.lastCall - dataDebouncing.prevCall < time\r\n      ) {\r\n        clearTimeout(dataDebouncing.idInterval);\r\n        dataDebouncing.idInterval = 0;\r\n      }\r\n      dataDebouncing.idInterval = setTimeout(func, time);\r\n    };\r\n  };\r\n  input.addEventListener(\"input\", debouncing(addText, 300));\r\n};\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (trype);\r\n\n\n//# sourceURL=webpack:///./modules/trype.js?");
 
 /***/ })
 

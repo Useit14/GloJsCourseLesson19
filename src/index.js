@@ -1,2 +1,2 @@
-import date from "./modules/date";
-date();
+import trype from "./modules/trype";
+trype();
