@@ -1,2 +1,2 @@
-import trype from "./modules/trype";
-trype();
+import anim from "./modules/anim";
+anim();
